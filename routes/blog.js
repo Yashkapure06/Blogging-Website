@@ -20,9 +20,9 @@ const storage = multer.diskStorage({
 })
 
 // upload parameters for multer for uploading images
-// const upload = multer({
-//     storage: storage,
-//     limits:{
-//         fileSize: 1024* 1024* 3,
-//     },
-// })
+const upload = multer({
+    storage: storage,
+    limits:{
+        fileSize: 1024* 1024* 3,
+    },
+})
