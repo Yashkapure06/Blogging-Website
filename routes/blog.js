@@ -26,3 +26,19 @@ const upload = multer({
         fileSize: 1024* 1024* 3,
     },
 })
+
+router.get('/new', (req, res)=>{
+    res.render('new');
+})
+
+
+//  view route 
+router.get('/:slug', async (res, req)=>{
+    const blog = await Blog.findOne({slug: req.params.slug})
+    // findOne() => this method finds and returns the first document that matches the query criteria.
+    if(blog){
+        res.render('show', {blog:blog});
+    } else{
+        res.redirect('/');
+    }
+})
