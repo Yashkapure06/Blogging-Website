@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
+    <title>Edit blog post</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="mb-4 text-white">editing <%= blog.title %> </h1>
+
+        <form action="/blogs/<%= blog.id %>?_method=PUT" method="POST">
+            <div class="form-group">
+
+                <label for="title" class="text-white">Title</label>
+                <input type="text" class="form-control" placeholder="Title" name="title" value="<%= blog.title %>"
+                    required>
+            </div>
+
+            <div class="form-group">
+
+                <label for="author" class="text-white">Author</label>
+                <input type="text" class="form-control" placeholder="Author" name="author" value="<%= blog.author %>"
+                    required>
+            </div>
+            <div class="form-group">
+
+                <label for="description" class="text-white">Description</label>
+                <textarea name="description" placeholder="Description" class="form-control">
+
+                    <%= blog.description %>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <a href="/" class="btn btn-warning">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

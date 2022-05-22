@@ -1,7 +1,7 @@
 // blog routes
 const express = require('express');
-const router = express.Router();
 const Blog = require('../models/Blog');
+const router = express.Router();
 const multer = require('multer');
 
 // Lets define Storage for storing the uploaded images 
@@ -9,7 +9,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     // to locate destination of a file which is being uploaded
     destination: function(res, file, callback){
-        callback(null,'/public/uploads');
+        callback(null,'./public/uploads/images');
     },
 
     // add back the extension to the file name
@@ -34,8 +34,8 @@ router.get('/new', (req, res)=>{
 
 
 //  view route 
-router.get('/:slug', async (res, req)=>{
-    const blog = await Blog.findOne({slug: req.params.slug})
+router.get('/:slug', async (req, res)=>{
+    let blog = await Blog.findOne({ slug: req.params.slug });
     // the await keyword is used to wait for the promise to be resolved
     
     // findOne() => this method finds and returns the first document that matches the query criteria.
@@ -54,7 +54,7 @@ router.post('/', upload.single('image'), async(req, res)=>{
     // req.body is the data that is being sent to the server
     // console.log(req.file);
     // console.log(req.body);
-    const blog = new Blog({
+    let blog = new Blog({
         title: req.body.title,
         author: req.body.author,
         description: req.body.description,
@@ -76,7 +76,7 @@ router.post('/', upload.single('image'), async(req, res)=>{
 router.get('/edit/:id', async(req, res) => {
     //get() => this method is used to find a single document by its id.
     //async keyword is used to wait for the promise to be resolved
-    const blog = await Blog.findById(req.params.id);
+    let blog = await Blog.findById(req.params.id);
     // findById() => this method finds and returns the first document that matches the query criteria.
     res.render('edit',{blog:blog});
     // render the edit view 
@@ -88,7 +88,7 @@ router.put('/:id', async(req, res)=>{
     // put() => this method is used to update a document in the collection.
     req.blog = await Blog.findById(req.params.id);
     // params is used for getting the id of the blog that is being edited
-    const blog = req.blog;
+    let blog = req.blog;
     // blog is the blog that is being edited
     blog.title = req.body.title;
     blog.author = req.body.author;

@@ -6,14 +6,14 @@ const mongoose = require("mongoose");
 //bring in method-override
 const methodOverride = require("method-override");
 
-const blogRoute = require("./routes/blog");
+const blogRoute = require("./routes/blogs");
 const Blog = require("./models/Blog");
 
 const app = express();
 
 // lets get connected with Mongoose
 mongoose.connect(
-  process.env.MONGO_URL,
+  'mongodb+srv://admin-yash:test123@cluster0.ryutq.mongodb.net/Blog?retryWrites=true&w=majority',
   //process.env.MONGO_URL is the environment variable that is set in the .env file
   {
     useNewUrlParser: true,
