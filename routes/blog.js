@@ -35,6 +35,8 @@ router.get('/new', (req, res)=>{
 //  view route 
 router.get('/:slug', async (res, req)=>{
     const blog = await Blog.findOne({slug: req.params.slug})
+    // the await keyword is used to wait for the promise to be resolved
+    
     // findOne() => this method finds and returns the first document that matches the query criteria.
     if(blog){
         res.render('show', {blog:blog});
@@ -42,3 +44,29 @@ router.get('/:slug', async (res, req)=>{
         res.redirect('/');
     }
 })
+
+// Routes that handles new posts 
+router.post('/', upload.single('image'), async(req, res)=>{
+    // single() => this method is used to upload a single file.
+    // req.file is the file that is being uploaded
+    // req.body is the data that is being sent to the server
+    // console.log(req.file);
+    // console.log(req.body);
+    const blog = new Blog({
+        title: req.body.title,
+        author: req.body.author,
+        description: req.body.description,
+        img: req.file.filename,
+    });
+
+    try{
+        blog = await blog.save();
+        // await means that the code will wait for the promise to be resolved
+        res.redirect(`blogs/${blog.slug}`);
+        // redirect to the show page
+        
+    }catch(err){
+        console.log(err);
+    }
+});
+
