@@ -104,3 +104,13 @@ router.put('/:id', async(req, res)=>{
         // redirect to the edit route
     }
 })
+
+// route that will handle delete
+router.delete('/:id', async(req, res)=>{
+    // delete() => this method is used to delete a document from the collection.
+    await Blog.findByIdAndDelete(req.params.id);
+    // findByIdAndDelete() => this method is used to delete a document from the collection.
+    res.redirect('/');
+})
+
+module.exports = router;
