@@ -21,6 +21,7 @@ const storage = multer.diskStorage({
 
 // upload parameters for multer for uploading images
 const upload = multer({
+    // multer will only accept files with these extensions
     storage: storage,
     limits:{
         fileSize: 1024* 1024* 3,
@@ -47,6 +48,7 @@ router.get('/:slug', async (res, req)=>{
 
 // Routes that handles new posts 
 router.post('/', upload.single('image'), async(req, res)=>{
+    //post() => this method is used to send data to the server.
     // single() => this method is used to upload a single file.
     // req.file is the file that is being uploaded
     // req.body is the data that is being sent to the server
@@ -71,10 +73,34 @@ router.post('/', upload.single('image'), async(req, res)=>{
 });
 
 // route that will handle edit view
-router.ge('/edit/:id', async(req, res) => {
+router.get('/edit/:id', async(req, res) => {
+    //get() => this method is used to find a single document by its id.
     //async keyword is used to wait for the promise to be resolved
     const blog = await Blog.findById(req.params.id);
     // findById() => this method finds and returns the first document that matches the query criteria.
     res.render('edit',{blog:blog});
     // render the edit view 
 });
+
+
+// route that will handle update
+router.put('/:id', async(req, res)=>{
+    // put() => this method is used to update a document in the collection.
+    req.blog = await Blog.findById(req.params.id);
+    // params is used for getting the id of the blog that is being edited
+    const blog = req.blog;
+    // blog is the blog that is being edited
+    blog.title = req.body.title;
+    blog.author = req.body.author;
+    blog.description = req.body.description;
+
+    try{
+        blog = await blog.save();
+        //now redirect to the view route
+        res.redirect(`/blogs/${blog.slug}`);
+    }catch(err){
+        console.log(err);
+        res.redirect(`/blogs/edit/${blog.id}`, {blog:blog});
+        // redirect to the edit route
+    }
+})
