@@ -70,3 +70,11 @@ router.post('/', upload.single('image'), async(req, res)=>{
     }
 });
 
+// route that will handle edit view
+router.ge('/edit/:id', async(req, res) => {
+    //async keyword is used to wait for the promise to be resolved
+    const blog = await Blog.findById(req.params.id);
+    // findById() => this method finds and returns the first document that matches the query criteria.
+    res.render('edit',{blog:blog});
+    // render the edit view 
+});
