@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="../public/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../public/vendor/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../public/vendor/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../public/vendor/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../public/vendor/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../public/vendor/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../public/vendor/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <!-- Template Main CSS File -->
-    <link href="../public/css/style.css" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-
-    <title>Blog_Name</title>
+<%- include('./partials/header.ejs') -%>
+<title>Blog_Name</title>
 </head>
 
 <body>
@@ -37,31 +13,50 @@
             <div class="container" data-aos="fade-up">
                 <% if(blogs.length<1){%>
 
-                    <p class="text-white">No posts yet, create a new one</p>
-        
+                <p class="text-white">No posts yet, create a new one</p>
+
                 <%  } %>
 
                 <div class="row">
-                    
+
                     <div class="col-lg-8 entries">
-                        
+
                         <% blogs.forEach(blog=>{ %>
                         <article class="entry">
 
                             <div class="entry-img">
-                                <img src="/uploads/images/<%= blog.img %>" alt="" class="img-fluid">
+                                <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>" width="600"
+                                    height="400" class="responsive img-fluid">
                             </div>
 
                             <h2 class="entry-title">
                                 <a href="blogs/<%=blog.slug %>"><%= blog.title %></a>
                             </h2>
+                            <!-- <div class="more position-relative" style="cursor: pointer;">
 
+
+                                <i class="material-icons p-2">more_vert</i>
+                                <div class="d-none options card rounded-pill shadow-sm p-1 position-absolute">
+                                    <a href="blogs/edit/<%= blog.id %> " class="rounded-circle p-2 mb-2"
+                                        style="background:blue;">
+                                        <i class="material-icons" style="color:white">create</i>
+                                    </a>
+                                    <form action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
+                                        <button class="rounded-circle p-2 bg-danger">
+                                            <i class="material-icons" style="color:white">delete</i>
+
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div> -->
                             <div class="entry-meta">
                                 <ul>
                                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
                                             href="blogs/<%=blog.slug %>"><%= blog.author%></a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                            href="blogs/<%=blog.slug %>"><time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a>
+                                            href="blogs/<%=blog.slug %>"><time
+                                                datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a>
                                     </li>
                                     <!-- <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
                                             href="blogs/<%=blog.slug %>">12 Comments</a></li> -->
@@ -69,9 +64,11 @@
                             </div>
 
                             <div class="entry-content">
+
                                 <p>
-                                    <%= blog.description.substring(0, 250) + " ..." %>
+                                    <%= blog.description.replace(/<[^>]+>/g, ' ').slice(0,105).concat('...')%>
                                 </p>
+
                                 <div class="read-more">
                                     <a href="blogs/<%=blog.slug %>">Read More</a>
                                 </div>
@@ -81,91 +78,69 @@
                         <% }) %>
 
                     </div>
+                    <div class="col-lg-4">
 
+                        <div class="sidebar">
+        
+                            <h3 class="sidebar-title">Search</h3>
+                            <div class="sidebar-item search-form">
+                                <form action="">
+                                    <input type="text">
+                                    <button type="submit"><i class="bi bi-search"></i></button>
+                                </form>
+                            </div>
+        
+                            <h3 class="sidebar-title">Categories</h3>
+                            <div class="sidebar-item categories">
+                                <ul>
+                                    <li><a href="#">General <span>(25)</span></a></li>
+                                    <li><a href="#">Lifestyle <span>(12)</span></a></li>
+                                    <li><a href="#">Travel <span>(5)</span></a></li>
+                                    <li><a href="#">Design <span>(22)</span></a></li>
+                                    <li><a href="#">Creative <span>(8)</span></a></li>
+                                    <li><a href="#">Educaion <span>(14)</span></a></li>
+                                </ul>
+                            </div>
+        
+                            <h3 class="sidebar-title">Recent Posts</h3>
+                            <div class="sidebar-item recent-posts">
+                                <% blogs.forEach(blog=>{ %>
+                                <div class="post-item clearfix">
+                                    <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>">
+                                    <h4><a href="blogs/<%=blog.slug %>"><%= blog.title %></a></h4>
+                                    <time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time>
+                                </div>
+                                
+                                <% }) %>
+        
+                            </div>
+                            
+                            <h3 class="sidebar-title">Tags</h3>
+                            <div class="sidebar-item tags">
+                                <ul>
+                                    <li><a href="#">App</a></li>
+                                    <li><a href="#">IT</a></li>
+                                    <li><a href="#">Business</a></li>
+                                    <li><a href="#">Mac</a></li>
+                                    <li><a href="#">Design</a></li>
+                                    <li><a href="#">Office</a></li>
+                                    <li><a href="#">Creative</a></li>
+                                    <li><a href="#">Studio</a></li>
+                                    <li><a href="#">Smart</a></li>
+                                    <li><a href="#">Tips</a></li>
+                                    <li><a href="#">Marketing</a></li>
+                                </ul>
+                            </div>
+        
+                        </div>
+        
+                    </div> 
                 </div>
 
             </div>
 
-            <div class="col-lg-4">
-
-                <div class="sidebar">
-    
-                  <h3 class="sidebar-title">Search</h3>
-                  <div class="sidebar-item search-form">
-                    <form action="">
-                      <input type="text">
-                      <button type="submit"><i class="bi bi-search"></i></button>
-                    </form>
-                  </div><!-- End sidebar search formn-->
-    
-                  <h3 class="sidebar-title">Categories</h3>
-                  <div class="sidebar-item categories">
-                    <ul>
-                      <li><a href="#">General <span>(25)</span></a></li>
-                      <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                      <li><a href="#">Travel <span>(5)</span></a></li>
-                      <li><a href="#">Design <span>(22)</span></a></li>
-                      <li><a href="#">Creative <span>(8)</span></a></li>
-                      <li><a href="#">Educaion <span>(14)</span></a></li>
-                    </ul>
-                  </div><!-- End sidebar categories-->
-    
-                  <h3 class="sidebar-title">Recent Posts</h3>
-                  <div class="sidebar-item recent-posts">
-                    <div class="post-item clearfix">
-                      <img src="assets/img/blog/blog-recent-1.jpg" alt="">
-                      <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-    
-                    <div class="post-item clearfix">
-                      <img src="assets/img/blog/blog-recent-2.jpg" alt="">
-                      <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-    
-                    <div class="post-item clearfix">
-                      <img src="assets/img/blog/blog-recent-3.jpg" alt="">
-                      <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-    
-                    <div class="post-item clearfix">
-                      <img src="assets/img/blog/blog-recent-4.jpg" alt="">
-                      <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-    
-                    <div class="post-item clearfix">
-                      <img src="assets/img/blog/blog-recent-5.jpg" alt="">
-                      <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-    
-                  </div>
-                  <!-- End sidebar recent posts-->
-    
-                  <h3 class="sidebar-title">Tags</h3>
-                  <div class="sidebar-item tags">
-                    <ul>
-                      <li><a href="#">App</a></li>
-                      <li><a href="#">IT</a></li>
-                      <li><a href="#">Business</a></li>
-                      <li><a href="#">Mac</a></li>
-                      <li><a href="#">Design</a></li>
-                      <li><a href="#">Office</a></li>
-                      <li><a href="#">Creative</a></li>
-                      <li><a href="#">Studio</a></li>
-                      <li><a href="#">Smart</a></li>
-                      <li><a href="#">Tips</a></li>
-                      <li><a href="#">Marketing</a></li>
-                    </ul>
-                  </div><!-- End sidebar tags-->
-    
-                </div><!-- End sidebar -->
-    
-              </div>
-              <!-- End blog sidebar -->
+           
+            <!-- End blog sidebar -->
 
         </section>
 
@@ -252,20 +227,4 @@
 
     </div> -->
     </main>
-    <script src="../public/js/index.js"></script>
-    <!-- Vendor JS Files -->
-    <script src="../public/vendor/aos/aos.js"></script>
-    <script src="../public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../public/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../public/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../public/vendor/php-email-form/validate.js"></script>
-    <script src="../public/vendor/purecounter/purecounter.js"></script>
-    <script src="../public/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="../public/js/main.js"></script>
-</body>
-
-</body>
-
-</html>
+    <%- include('./partials/footer.ejs') -%>

@@ -10,7 +10,9 @@ const blogRoute = require("./routes/blogs");
 const Blog = require("./models/Blog");
 
 const app = express();
+
 app.use('/public', express.static('public'))
+
 // lets get connected with Mongoose
 mongoose.connect(
   'mongodb+srv://admin-yash:test123@cluster0.ryutq.mongodb.net/Blog?retryWrites=true&w=majority',
