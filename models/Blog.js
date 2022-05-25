@@ -51,6 +51,10 @@ const blogSchema = new mongoose.Schema({
         slug_padding_size:2
         //slug_padding_size means the number of digits to be added to the slug
     },
+    likeCount: {
+        type: Number,
+        default: 0,
+    },
 });
 
 blogSchema.pre('validate', function (next) {
