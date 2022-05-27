@@ -13,7 +13,7 @@
             <div class="container" data-aos="fade-up">
                 <% if(blogs.length<1){%>
 
-                <p class="text-white">No posts yet, create a new one</p>
+                <p class="text-black">No posts yet, create a new one</p>
 
                 <%  } %>
 
@@ -22,8 +22,8 @@
                     <div class="col-lg-8 entries">
 
                         <% blogs.forEach(blog=>{ %>
+                            <p style="display:none; position:absolute" id="blogId"><%= blog.id  %> </p>
                         <article class="entry">
-
                             <div class="entry-img">
                                 <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>" width="600"
                                     height="400" class="responsive img-fluid">

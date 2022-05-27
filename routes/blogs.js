@@ -4,6 +4,10 @@ const Blog = require('../models/Blog');
 const router = express.Router();
 const multer = require('multer');
 
+
+// const  likePost =require('../controllers/posts.js');
+
+
 // Lets define Storage for storing the uploaded images 
 
 const storage = multer.diskStorage({
@@ -27,6 +31,21 @@ const upload = multer({
         fileSize: 1024* 1024* 3,
     },
 })
+
+
+// const likePost = async (req, res) => {
+//     const { id } = req.params;
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    
+//     const blog = await BlogSchema.findById(id);
+
+//     const updatedPost = await BlogSchema.findByIdAndUpdate(id, { likeCount: blog.likeCount + 1 }, { new: true });
+    
+//     res.json(updatedPost);
+// }
+
+
 
 router.get('/new', (req, res)=>{
     res.render('new');
@@ -71,7 +90,6 @@ router.post('/', upload.single('image'), async(req, res)=>{
         console.log(err);
     }
 });
-
 // route that will handle edit view
 router.get('/edit/:id', async(req, res) => {
     //get() => this method is used to find a single document by its id.
@@ -89,6 +107,8 @@ router.put('/:id', async(req, res)=>{
     req.blog = await Blog.findById(req.params.id);
     // params is used for getting the id of the blog that is being edited
     let blog = req.blog;
+
+    // const updatedPost = await Blog.findByIdAndUpdate(id, { likeCount: blog.likeCount + 1 }, { new: true });
     // blog is the blog that is being edited
     blog.title = req.body.title;
     blog.author = req.body.author;
@@ -105,6 +125,9 @@ router.put('/:id', async(req, res)=>{
     }
 })
 
+// router.patch('/:id/likePost', likePost);
+
+
 // route that will handle delete
 router.delete('/:id', async(req, res)=>{
     // delete() => this method is used to delete a document from the collection.
@@ -112,5 +135,6 @@ router.delete('/:id', async(req, res)=>{
     // findByIdAndDelete() => this method is used to delete a document from the collection.
     res.redirect('/');
 })
+
 
 module.exports = router;

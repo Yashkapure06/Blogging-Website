@@ -1,5 +1,6 @@
 <%- include ('./partials/header.ejs') -%> 
     <title> <%= blog.title %> </title>
+    
 </head>
 
 <body>
@@ -111,17 +112,17 @@
     
                   </div>
     
-                  <div class="entry-footer">
-                    <i class="bi bi-folder"></i>
+                  <div class="entry-footer mb-2 mt-1 p-1 col-md-4">
+                    <button style="border:none; background:transparent" id="like"><i class="bi bi-heart"><%=blog.likeCount %> </i></button>
                     <ul class="cats">
-                      <li><a href="#">Business</a></li>
                     </ul>
-    
+                  </div>
+                  <div class="entry-footer">
                     <i class="bi bi-tags"></i>
                     <ul class="tags">
-                      <li><a href="#">Creative</a></li>
-                      <li><a href="#">Tips</a></li>
-                      <li><a href="#">Marketing</a></li>
+                      <li><a>Creative</a></li>
+                      <li><a>Tips</a></li>
+                      <li><a>Marketing</a></li>
                     </ul>
                   </div>
     

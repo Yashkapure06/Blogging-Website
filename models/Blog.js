@@ -53,7 +53,6 @@ const blogSchema = new mongoose.Schema({
     },
     likeCount: {
         type: Number,
-        default: 0,
     },
 });
 
