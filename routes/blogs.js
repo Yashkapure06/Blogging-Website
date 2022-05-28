@@ -6,7 +6,7 @@ const multer = require('multer');
 
 
 // const  likePost =require('../controllers/posts.js');
-
+// Blog.findOneAndUpdate({_id :id}, {$inc : {'blog.likeCount' : 1}}).exec();
 
 // Lets define Storage for storing the uploaded images 
 
@@ -33,24 +33,16 @@ const upload = multer({
 })
 
 
-// const likePost = async (req, res) => {
-//     const { id } = req.params;
-
-//     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    
-//     const blog = await BlogSchema.findById(id);
-
-//     const updatedPost = await BlogSchema.findByIdAndUpdate(id, { likeCount: blog.likeCount + 1 }, { new: true });
-    
-//     res.json(updatedPost);
-// }
-
-
 
 router.get('/new', (req, res)=>{
     res.render('new');
 })
 
+//like
+router.get('/:id/like', (req, res)=>{
+    Blog.findOneAndUpdate({_id :id}, {$inc : {'blog.likeCount' : 1}}).exec();
+    res.redirect('/blogs/:id');
+})
 
 //  view route 
 router.get('/:slug', async (req, res)=>{
@@ -78,6 +70,10 @@ router.post('/', upload.single('image'), async(req, res)=>{
         author: req.body.author,
         description: req.body.description,
         img: req.file.filename,
+        aboutAuthor: req.body.aboutAuthor,
+        twitter: req.body.twitter,
+        instagram: req.body.instagram,
+        website: req.body.website,
     });
 
     try{
@@ -106,14 +102,18 @@ router.put('/:id', async(req, res)=>{
     // put() => this method is used to update a document in the collection.
     req.blog = await Blog.findById(req.params.id);
     // params is used for getting the id of the blog that is being edited
-    let blog = req.blog;
 
-    // const updatedPost = await Blog.findByIdAndUpdate(id, { likeCount: blog.likeCount + 1 }, { new: true });
+
+    // req.blog = await Blog.findOneAndUpdate({_id:req.params.id}, {$inc: {Blog: req.likeCount: 1}}).exec();
+
+
+    let blog = req.blog;                    
+
+    // const updatedPost = await Blog.findByIdAndUpdate(id, { likeCount: req.params.likeCount + 1 }, { new: true });
     // blog is the blog that is being edited
     blog.title = req.body.title;
     blog.author = req.body.author;
     blog.description = req.body.description;
-
     try{
         blog = await blog.save();
         //now redirect to the view route

@@ -26,6 +26,20 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    twitter:{
+        type: String,
+        required: true,
+    },
+    instagram:{
+        type: String,
+        required: true,
+    },
+    website:{
+        type: String,
+    },
+    aboutAuthor:{
+        type: String,
+    },
     description: {
         type: String,
         required: true,
@@ -53,7 +67,7 @@ const blogSchema = new mongoose.Schema({
     },
     likeCount: {
         type: Number,
-    },
+    }
 });
 
 blogSchema.pre('validate', function (next) {
