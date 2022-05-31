@@ -39,10 +39,21 @@ router.get('/new', (req, res)=>{
 })
 
 //like
-router.get('/:id/like', (req, res)=>{
-    Blog.findOneAndUpdate({_id :id}, {$inc : {'blog.likeCount' : 1}}).exec();
-    res.redirect('/blogs/:id');
-})
+// add a document to the DB collection recording the click event
+
+// router.put("/:id/like",async (req,res)=>{
+
+//     try{
+//         const blog = await Blog.findById(req.params.id);
+//         blog.likeCount += 1;
+//         await blog.save();
+//         console.log(blog.likeCount);
+//         res.send({likeCount: blog.likeCount}+" Likes");
+
+//     }catch(err){
+//         res.status(500).json(err);
+//     }
+// })
 
 //  view route 
 router.get('/:slug', async (req, res)=>{
@@ -56,7 +67,6 @@ router.get('/:slug', async (req, res)=>{
         res.redirect('/');
     }
 })
-
 // Routes that handles new posts 
 router.post('/', upload.single('image'), async(req, res)=>{
     //post() => this method is used to send data to the server.
@@ -74,6 +84,8 @@ router.post('/', upload.single('image'), async(req, res)=>{
         twitter: req.body.twitter,
         instagram: req.body.instagram,
         website: req.body.website,
+        metaDescription: req.body.metaDescription,
+        likeCount: req.body.likeCount,
     });
 
     try{
