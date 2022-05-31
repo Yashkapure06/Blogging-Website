@@ -17,7 +17,8 @@
     <meta property="twitter:image" content="/uploads/images/<%= blog.img %>" />
 
     <title> <%= blog.title %> </title>
-
+    
+    
 </head>
 
 <body>
@@ -75,8 +76,7 @@
 
               <div class="mb-2 mt-1 p-1 col-md-4">
                 
-                <button style="border:none; background:transparent" id="<%=blog.id%>" onclick="console.log('<%=blog.id%>')" ><i class="bi bi-heart"
-                  id="likes"><%= blog.likeCount %> Likes </i></button>
+                <button style="border:none; background:transparent" id="<%=blog.id%> myButton">Click Me<i class="bi bi-heart">  </i><i>Likes</i></button>
                 <ul class="cats">
                 </ul>
               </div>
