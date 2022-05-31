@@ -22,6 +22,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    metaDescription:{
+        type: String,
+    },
     author:{
         type: String,
         required: true,
@@ -66,7 +69,7 @@ const blogSchema = new mongoose.Schema({
         //slug_padding_size means the number of digits to be added to the slug
     },
     likeCount: {
-        type: Number,
+        type: Array,
     }
 });
 
