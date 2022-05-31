@@ -1,76 +1,27 @@
 <%- include ('./partials/header.ejs') -%>
-<title> <%= blog.title %> </title>
-<script>
-  //counter
-  var button = document.getElementById("likes"),
-    count = 0;
-    button.onclick = function () {
-      count += 1;
-      button.innerHTML =  count + " : Likes ";
-    };
-</script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>" />
+    <meta property="og:type" content="Blogging website">
+    <link rel="icon" type="image/png" href="">
+    <meta property="og:title" content="<%= blog.title %>">
+    <meta property="og:description"
+      content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>">
+    <meta property="og:image" content="/uploads/images/<%= blog.img %>"/>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="<%= blog.title %>">
+    <meta property="twitter:description"
+      content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>">
+    <meta property="twitter:image" content="/uploads/images/<%= blog.img %>" />
+
+    <title> <%= blog.title %> </title>
+
 </head>
 
 <body>
-  <!-- <div class="container p-2">
-        <div class="cardMain shadow-lg rounded p-3">
-            <div class="row">
-                <div class="col-4">
-
-                    <a href="/" class="rounded-pill shadow p-2  d-flex align-items-center justify-content-center"
-                        style="text-decoration:none;">
-                        <i class="material-icons  mr-0" style="color:black">arrow_left
-                        </i> <span class="pr-0" style="color:black">Back</span>
-                    </a>
-                </div>
-                <div class="col-5 mt-5">
-                    <h1> <%= blog.title %> </h1>
-                </div>
-                <div class="col-2">
-                    <div class=" more position-relative" style="cursor: pointer;">
-                        <i class="material-icons p-2">more_vert</i>
-                        <div class="d-none card rounded-lg shadow-sm p-1 position-absolute" style="z-index: 9000;">
-                            <a href="#" class="rounded-pill p-2 mb-2 d-flex align-items-center"
-                                style="background:blue;">
-                                <i class="material-icons" style="color:white">create</i>
-                                <span class="" style="color:white">Edit</span>
-                            </a>
-                            <form action="" method="POST">
-                                <button class="rounded-pill p-2 bg-danger d-flex align-items-center">
-                                    <i class="material-icons" style="color:white">delete
-                                    </i> <span class="" style="color:white">Delete</span>
-                                </button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row shadow">
-                <div class="col-12  card-img">
-                    <img src="/uploads/images/<%= blog.img %>" class="card-img responsive" alt="...">
-
-                </div>
-            </div>
-            <div class="d-flex align-items-end mt-3">
-                <div class="mr-2">
-                    <img src="/uploads/images/<%= blog.img %>" class="rounded-circle"
-                        style="width: 60px; height: 60px;">
-                </div>
-                <div class=" flex-grow-1">
-                    <h5 class="" style="font-size: 16px; line-height: 0.5rem;">
-                        <span><b> <%= blog.author %></b></span></h5>
-                    <p style="font-size: 12px; line-height: 0.2rem;">
-                        <%= blog.timeCreated.toLocaleDateString() %> %></p>
-                </div>
-
-            </div>
-            <p class="card-text"> <%- blog.description %>
-        </div>
-
-
-    </div> -->
+  
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -107,12 +58,8 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John
-                      Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time
-                        datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12
-                      Comments</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html"><%= blog.author%></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a></li>
                 </ul>
               </div>
 
@@ -127,8 +74,9 @@
               </div>
 
               <div class="mb-2 mt-1 p-1 col-md-4">
-                <button style="border:none; background:transparent" ><i class="bi bi-heart"
-                  id="likes"> </i></button>
+                
+                <button style="border:none; background:transparent" id="<%=blog.id%>" onclick="console.log('<%=blog.id%>')" ><i class="bi bi-heart"
+                  id="likes"><%= blog.likeCount %> Likes </i></button>
                 <ul class="cats">
                 </ul>
               </div>
@@ -159,106 +107,12 @@
               </div>
             </div><!-- End blog author bio -->
 
-            <div class="blog-comments">
-
-              <h4 class="comments-count">2(Total Comments) Comments</h4>
-
-              <div id="comment-1" class="comment">
-                <div class="d-flex">
-                  <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
-                  <div>
-                    <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i>
-                        Reply</a></h5>
-                    <time datetime="2020-01-01">01 Jan, 2020</time>
-                    <p>
-                      Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis
-                      molestiae est qui cum soluta.
-                      Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
-                    </p>
-                  </div>
-                </div>
-              </div><!-- End comment #1 -->
-
-
-              <div class="reply-form">
-                <h4>Leave a Reply</h4>
-                <p>Your email address will not be published. Required fields are marked * </p>
-                <form action="" method="post">
-                  <div class="row">
-                    <div class="col-md-6 form-group">
-                      <input name="name" type="text" class="form-control" placeholder="Your Name*">
-                    </div>
-                    <div class="col-md-6 form-group">
-                      <input name="email" type="text" class="form-control" placeholder="Your Email*">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col form-group">
-                      <input name="website" type="text" class="form-control" placeholder="Your Website">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col form-group">
-                      <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary" onclick="sendComment()">Post Comment</button>
-
-                </form>
-
-              </div>
-
-            </div><!-- End blog comments -->
 
           </div><!-- End blog entries list -->
 
-          <div class="col-lg-4">
+          
 
-            <div class="sidebar">
-
-              <h3 class="sidebar-title">Search</h3>
-              <div class="sidebar-item search-form">
-                <form action="">
-                  <input type="text">
-                  <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-              </div><!-- End sidebar search formn-->
-
-              <h3 class="sidebar-title">Categories</h3>
-              <div class="sidebar-item categories">
-                <ul>
-                  <li><a href="#">General <span>(25)</span></a></li>
-                  <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                  <li><a href="#">Travel <span>(5)</span></a></li>
-                  <li><a href="#">Design <span>(22)</span></a></li>
-                  <li><a href="#">Creative <span>(8)</span></a></li>
-                  <li><a href="#">Educaion <span>(14)</span></a></li>
-                </ul>
-              </div><!-- End sidebar categories-->
-
-              <!-- End sidebar recent posts-->
-
-              <h3 class="sidebar-title">Tags</h3>
-              <div class="sidebar-item tags">
-                <ul>
-                  <li><a href="#">App</a></li>
-                  <li><a href="#">IT</a></li>
-                  <li><a href="#">Business</a></li>
-                  <li><a href="#">Mac</a></li>
-                  <li><a href="#">Design</a></li>
-                  <li><a href="#">Office</a></li>
-                  <li><a href="#">Creative</a></li>
-                  <li><a href="#">Studio</a></li>
-                  <li><a href="#">Smart</a></li>
-                  <li><a href="#">Tips</a></li>
-                  <li><a href="#">Marketing</a></li>
-                </ul>
-              </div><!-- End sidebar tags-->
-
-            </div><!-- End sidebar -->
-
-          </div><!-- End blog sidebar -->
-
+            
         </div>
 
       </div>
