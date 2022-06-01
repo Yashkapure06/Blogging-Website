@@ -4,10 +4,13 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>" />
     <meta property="og:type" content="Blogging website">
-    <link rel="icon" type="image/png" href="">
+    <link rel="icon" type="image/png" href="../public/images/favicon.ico">
+    <meta name="keywords" content="<%= blog.metaKeywords %> ">
+    
     <meta property="og:title" content="<%= blog.title %>">
     <meta property="og:description"
       content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>">
+    <meta name="author" content="<%= blog.author %>"/>
     <meta property="og:image" content="/uploads/images/<%= blog.img %>"/>
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -23,6 +26,11 @@
 
 <body>
   
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="/">Anonymous Blogger 💻🤓<span>.</span></a></h1>
+    </div>
+</header>
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -31,7 +39,7 @@
         <div class="col-2 mt-2 mb-5">
 
           <a href="/" class="rounded-pill shadow p-2  d-flex align-items-center justify-content-center"
-            style="text-decoration:none;"><span class="pr-0" style="color:black">Back</span>
+            style="text-decoration:none;margin-top:100px"><span class="pr-0" style="color:black">Back</span>
           </a>
         </div>
         <h2><%= blog.title %> </h2>
@@ -45,7 +53,7 @@
 
         <div class="row">
 
-          <div class="col-lg-8 entries">
+          <div class="col-lg-9 entries">
 
             <article class="entry entry-single">
 
@@ -59,16 +67,16 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html"><%= blog.author%></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a ><%= blog.author%></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a ><time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a></li>
                 </ul>
               </div>
 
-              <div class="entry-content">
-
+              <div class="entry-content" style="text-align: justify;">
+              <p>
 
                 <%- blog.description %>
-
+              </p>
               </div>
               <div class="entry-footer">
 
@@ -83,9 +91,7 @@
               <div class="entry-footer">
                 <i class="bi bi-tags"></i>
                 <ul class="tags">
-                  <li><a>Creative</a></li>
-                  <li><a>Tips</a></li>
-                  <li><a>Marketing</a></li>
+                  <li><a><%= blog.tags %> </a></li>
                 </ul>
               </div>
 
