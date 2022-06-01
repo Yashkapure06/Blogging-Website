@@ -86,6 +86,8 @@ router.post('/', upload.single('image'), async(req, res)=>{
         website: req.body.website,
         metaDescription: req.body.metaDescription,
         likeCount: req.body.likeCount,
+        tags: req.body.tags,
+        metaKeywords: req.body.metaKeywords,
     });
 
     try{
