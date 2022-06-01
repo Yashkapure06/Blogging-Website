@@ -70,6 +70,12 @@ const blogSchema = new mongoose.Schema({
     },
     likeCount: {
         type: Array,
+    },
+    tags: {
+        type: Array,
+    },
+    metaKeywords:{
+        type: String,
     }
 });
 
