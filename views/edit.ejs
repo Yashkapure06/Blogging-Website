@@ -15,6 +15,13 @@
                     <input type="text" class="form-control" placeholder="Title" value="<%= blog.title %>" name="title" required>
                    
                 </div>
+                
+                <div class="col-md-10 mb-3 form-group">
+                    <input type="text" class="form-control" placeholder="Add Tags (Use comma as a seperator  ' , ' )" value="<%= blog.tags %>" name="tags" required>
+                </div>
+                <div class="col-md-10 mb-3 form-group">
+                    <input type="text" class="form-control" placeholder="Add Meta Keywords (Use comma as a seperator  ' , ' )" value="<%= blog.metaKeywords%>" name="tags" required>
+                </div>
 
                 <div class="col-md-10 mb-3 form-group">
                     <input type="text" class="form-control" placeholder="Author" name="author" value="<%= blog.author %>" required>
