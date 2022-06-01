@@ -1,9 +1,32 @@
-<%- include('./partials/header.ejs') -%>
-<title>Blog_Name</title>
+<%- include('./partials/header.ejs') -%> 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#000000" />
+<meta name="description" content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more..." />
+    <meta property="og:type" content="Blogging website">
+    <link rel="icon" type="image/png" href="../public/images/favicon.ico">
+    <meta property="og:title" content="Anonymous Blogger💻🤓">
+    <meta property="og:description"
+      content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
+    <meta name="keywords" content="Best Blogging Site, Best Blogs, Anonymous Blogger, Best Anonymus Blogs, Tech, Non-Tech, General Knowledge, Astronomy">
+    <meta property="og:image" content="../public/images/AB.png"/>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Anonymous Blogger 💻🤓">
+    <meta property="twitter:description"
+      content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
+    <meta property="twitter:image" content="../public/images/AB.png" />
+<title>Anonymous Blogger 💻🤓</title>
 </head>
 
 <body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+          <h1 class="logo me-auto"><a href="/">AnonymousBlogger💻🤓<span>.</span></a></h1>
+        </div>
+    </header>
     <main id="main">
+
         <section id="blog" class="blog">
             <!-- <div class="row mb-3">
                 <a href="blogs/new" class="btn btn-success d-flex align-items-center"><i
@@ -22,7 +45,11 @@
                     <div class="col-lg-8 entries">
 
                         <% blogs.forEach(blog=>{ %>
-                            <p style="display:none; position:absolute" id="blogId"><%= blog.id  %> </p>
+                        <!-- <a href="blogs/edit/<%= blog.id %> " class="rounded-circle p-2 mb-2"
+                                style="background:blue;">
+                                <i class="material-icons" style="color:white">create</i>
+                            </a> -->
+                        <p style="display:none; position:absolute" id="blogId"><%= blog.id  %> </p>
                         <article class="entry">
                             <div class="entry-img">
                                 <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>" width="600"
@@ -58,7 +85,7 @@
                                             href="blogs/<%=blog.slug %>"><time
                                                 datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
 
@@ -80,27 +107,8 @@
                     <div class="col-lg-4">
 
                         <div class="sidebar">
-        
-                            <h3 class="sidebar-title">Search</h3>
-                            <div class="sidebar-item search-form">
-                                <form action="">
-                                    <input type="text">
-                                    <button type="submit"><i class="bi bi-search"></i></button>
-                                </form>
-                            </div>
-        
-                            <h3 class="sidebar-title">Categories</h3>
-                            <div class="sidebar-item categories">
-                                <ul>
-                                    <li><a href="#">General <span>(25)</span></a></li>
-                                    <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                                    <li><a href="#">Travel <span>(5)</span></a></li>
-                                    <li><a href="#">Design <span>(22)</span></a></li>
-                                    <li><a href="#">Creative <span>(8)</span></a></li>
-                                    <li><a href="#">Educaion <span>(14)</span></a></li>
-                                </ul>
-                            </div>
-        
+
+
                             <h3 class="sidebar-title">Recent Posts</h3>
                             <div class="sidebar-item recent-posts">
                                 <% blogs.forEach(blog=>{ %>
@@ -109,121 +117,27 @@
                                     <h4><a href="blogs/<%=blog.slug %>"><%= blog.title %></a></h4>
                                     <time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time>
                                 </div>
-                                
+
                                 <% }) %>
-        
+
                             </div>
                             
-                            <h3 class="sidebar-title">Tags</h3>
-                            <div class="sidebar-item tags">
-                                <ul>
-                                    <li><a href="#">App</a></li>
-                                    <li><a href="#">IT</a></li>
-                                    <li><a href="#">Business</a></li>
-                                    <li><a href="#">Mac</a></li>
-                                    <li><a href="#">Design</a></li>
-                                    <li><a href="#">Office</a></li>
-                                    <li><a href="#">Creative</a></li>
-                                    <li><a href="#">Studio</a></li>
-                                    <li><a href="#">Smart</a></li>
-                                    <li><a href="#">Tips</a></li>
-                                    <li><a href="#">Marketing</a></li>
-                                </ul>
-                            </div>
-        
+                           
+
+                         
+
                         </div>
-        
-                    </div> 
+
+                    </div>
                 </div>
 
             </div>
 
-           
+
             <!-- End blog sidebar -->
 
         </section>
 
-        <!-- <div class="container">
-        <div class="m-4 text-center">
-            <h1>Blog_Name</h1>
-            <p class="text-white">Lifestyle | Fashion | Travel</p>
-
-        </div>
-        <div class="row mb-3">
-            <a href="blogs/new" class="btn btn-success d-flex align-items-center"><i
-                    class="material-icons mr-2">add_circle</i>
-                New Blog</a>
-        </div>
-        <div class="row ">
-            <% if(blogs.length<1){%>
-
-            <p class="text-white">No posts yet, create a new one</p>
-
-            <%  } %>
-
-
-            <% blogs.forEach(blog=>{ %>
-            <div class="col-lg-6 card mt-2 mr-0 ml-0">
-                <div class="row p-2 ml-0 card-img">
-
-                    <div class="col-14  overflow-hidden">
-                        <img src="/uploads/images/<%= blog.img %>" class="card-img" alt="...">
-
-                    </div>
-
-                    <div class="col-12">
-                        <div class="d-flex align-items-start">
-                            <h5 class="w-100"><b> <%= blog.title %> </b></h5>
-
-                            <div class="more position-relative" style="cursor: pointer;">
-
-
-                                <i class="material-icons p-2">more_vert</i>
-                                <div class="d-none options card rounded-pill shadow-sm p-1 position-absolute">
-                                    <a href="blogs/edit/<%= blog.id %> " class="rounded-circle p-2 mb-2"
-                                        style="background:blue;">
-                                        <i class="material-icons" style="color:white">create</i>
-                                    </a>
-                                    <form action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
-                                        <button class="rounded-circle p-2 bg-danger">
-                                            <i class="material-icons" style="color:white">delete</i>
-
-                                        </button>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <span class="align-self-stretch "><%= blog.snippet %>
-
-                        </span>
-                        <div class="d-flex align-items-end">
-                            <div class="mr-2">
-                                <img src="/uploads/images/<%= blog.img %>" class="rounded-circle"
-                                    style="width: 40px; height: 40px;">
-                            </div>
-                            <div class=" flex-grow-1">
-                                <h5 class="" style="font-size: 14px; line-height: 0.5rem;">
-                                    <span><b><%= blog.author%></b></span></h5>
-                                <p style="font-size: 8px; line-height: 0.2rem;">
-                                    <%= blog.timeCreated.toLocaleDateString() %></p>
-                            </div>
-                            <a href="blogs/<%=blog.slug %> " class=" align-self-end">
-                                <i class='material-icons ml-3 text-black'>send</i>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <% }) %>
-
-
-
-
-    </div> -->
+       
     </main>
     <%- include('./partials/footer.ejs') -%>
