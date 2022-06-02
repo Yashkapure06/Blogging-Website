@@ -78,11 +78,9 @@
                 <%- blog.description %>
               </p>
               </div>
-              <div class="entry-footer">
+              
 
-              </div>
-
-              <div class="mb-2 mt-1 p-1 col-md-4 ">
+              <div class="mb-2 mt-1 p-0 col-md-4 ">
                 
                 <!-- <button style="border:none; background:transparent" id="<%=blog.id%> myButton">Click Me<i class="bi bi-heart">  </i><i>Likes</i></button> -->
                 <ul class="cats">
@@ -102,9 +100,9 @@
               <div>
                 <h4><%= blog.author  %> </h4>
                 <div class="social-links">
-                  <a href="https://twitter.com/<%=blog.twitter%> "><i class="bi bi-twitter"></i></a>
-                  <a href="<%=blog.website %>"><i class="bi bi-globe"></i></a>
-                  <a href="https://instagram.com/<%=blog.instagram%>"><i class="biu bi-instagram"></i></a>
+                  <a target="_blank" href="https://twitter.com/<%=blog.twitter%> "><i class="bi bi-twitter"></i></a>
+                  <a target="_blank" href="<%=blog.website %>"><i class="bi bi-globe"></i></a>
+                  <a target="_blank" href="https://instagram.com/<%=blog.instagram%>"><i class="biu bi-instagram"></i></a>
                 </div>
                 <p>
                   <%= blog.aboutAuthor.replace(/<[^>]+>/g, '') %>
