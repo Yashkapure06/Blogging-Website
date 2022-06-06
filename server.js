@@ -8,6 +8,8 @@ const methodOverride = require("method-override");
 
 const blogRoute = require("./routes/blogs");
 const Blog = require("./models/Blog");
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 
@@ -15,7 +17,7 @@ app.use('/public', express.static('public'))
 
 // lets get connected with Mongoose
 mongoose.connect(
-  'mongodb+srv://admin-yash:test123@cluster0.ryutq.mongodb.net/Blog?retryWrites=true&w=majority',
+  process.env.CONNECTION_URL,
   //process.env.MONGO_URL is the environment variable that is set in the .env file
   {
     useNewUrlParser: true,
@@ -29,7 +31,6 @@ mongoose.connect(
     console.log(err || "Connected to MongoDB");
   }
 );
-
 
 // Lets set template engine
 app.set("view engine", "ejs");
@@ -52,7 +53,7 @@ app.use(express.static("public"));
 // express.static() is a middleware that is used to serve static files
 app.use("/blogs", blogRoute);
 
-var port = process.env.PORT || "3000";
+var port = process.env.PORT;
 app.listen(port, (err) => {
   if (err) throw err;
   console.log("Server listening on port", port);
