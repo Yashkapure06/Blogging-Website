@@ -1,40 +1,42 @@
-<%- include('./partials/header.ejs') -%> 
+<%- include('./partials/header.ejs') -%>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#000000" />
-<meta name="description" content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more..." />
-    <meta property="og:type" content="Blogging website">
-    <link rel="icon" type="image/png" href="../public/images/favicon.ico">
-    <meta property="og:title" content="Anonymous Blogger💻🤓">
-    <meta property="og:description"
-      content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
-    <meta name="keywords" content="Best Blogging Site, Best Blogs, Anonymous Blogger, Best Anonymus Blogs, Tech, Non-Tech, General Knowledge, Astronomy">
-    <meta property="og:image" content="../public/images/AB.png"/>
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Anonymous Blogger 💻🤓">
-    <meta property="twitter:description"
-      content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
-    <meta property="twitter:image" content="../public/images/AB.png" />
+<meta name="description"
+    content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more..." />
+<meta property="og:type" content="Blogging website">
+<link rel="icon" type="image/png" href="../public/images/favicon.ico">
+<meta property="og:title" content="Anonymous Blogger💻🤓">
+<meta property="og:description"
+    content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
+<meta name="keywords"
+    content="Best Blogging Site, Best Blogs, Anonymous Blogger, Best Anonymus Blogs, Tech, Non-Tech, General Knowledge, Astronomy">
+<meta property="og:image" content="../public/images/AB.png" />
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Anonymous Blogger 💻🤓">
+<meta property="twitter:description"
+    content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
+<meta property="twitter:image" content="../public/images/AB.png" />
 <title>Anonymous Blogger 💻🤓</title>
 </head>
 
 <body>
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center">
-          <h1 class="logo me-auto"><a href="/">AnonymousBlogger💻🤓<span>.</span></a></h1>
+            <h1 class="logo me-auto"><a href="/">AnonymousBlogger💻🤓<span>.</span></a></h1>
         </div>
     </header>
     <main id="main">
 
         <section id="blog" class="blog">
-            <!-- <div class="row mb-3">
-                <a href="blogs/new" class="btn btn-success d-flex align-items-center"><i
-                        class="material-icons mr-2">add_circle</i>
-                    New Blog</a>
-            </div> -->
+            
             <div class="container" data-aos="fade-up">
                 <% if(blogs.length<1){%>
+                    <div style="margin-left:25px">
+                        <a href="blogs/new"> <input class="footer-newsletter btn btn-success " type="submit" value="➕ New Post">
+                            </a>
+                    </div>
 
                 <p class="text-black">No posts yet, create a new one</p>
 
@@ -45,11 +47,11 @@
                     <div class="col-lg-8 entries">
 
                         <% blogs.forEach(blog=>{ %>
-                        <!-- <a href="blogs/edit/<%= blog.id %> " class="rounded-circle p-2 mb-2"
-                                style="background:blue;">
-                                <i class="material-icons" style="color:white">create</i>
-                            </a> -->
+                      
                         <p style="display:none; position:absolute" id="blogId"><%= blog.id  %> </p>
+                          <!-- <a href="blogs/edit/<%= blog.id %> " >
+                                <input class="footer-newsletter btn btn-success " type="submit" value="🛠 Edit Post">
+                        </a> -->
                         <article class="entry">
                             <div class="entry-img">
                                 <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>" width="600"
@@ -59,24 +61,18 @@
                             <h2 class="entry-title">
                                 <a href="blogs/<%=blog.slug %>"><%= blog.title %></a>
                             </h2>
-                            <!-- <div class="more position-relative" style="cursor: pointer;">
-
-
-                                <i class="material-icons p-2">more_vert</i>
-                                <div class="d-none options card rounded-pill shadow-sm p-1 position-absolute">
-                                    <a href="blogs/edit/<%= blog.id %> " class="rounded-circle p-2 mb-2"
-                                        style="background:blue;">
-                                        <i class="material-icons" style="color:white">create</i>
+                            <div style="cursor: pointer;">
+                                <div style="display:flex; margin-bottom:15px">
+                                    <a href="blogs/edit/<%= blog.id %> " >
+                                        <input class="footer-newsletter btn btn-success " type="submit" value="🛠 Edit Post">
                                     </a>
-                                    <form action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
-                                        <button class="rounded-circle p-2 bg-danger">
-                                            <i class="material-icons" style="color:white">delete</i>
+                                    <form style="margin-left:15px" action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
+                                            <input class="footer-newsletter btn btn-danger " type="submit" value="❌ Delete Post">
 
-                                        </button>
                                     </form>
 
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="entry-meta">
                                 <ul>
                                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
@@ -121,10 +117,10 @@
                                 <% }) %>
 
                             </div>
-                            
-                           
 
-                         
+
+
+
 
                         </div>
 
@@ -138,6 +134,6 @@
 
         </section>
 
-       
+
     </main>
     <%- include('./partials/footer.ejs') -%>
