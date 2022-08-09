@@ -23,7 +23,7 @@ const makeCommit = n =>{
 
 }
 
-makeCommit(75);
+makeCommit(105);
 
 
 
