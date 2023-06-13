@@ -6,7 +6,7 @@
 /.pnp
 .pnp.js
 /virtualSize
-/vitals.txt
+vitals.txt
 # testing
 /coverage
 
