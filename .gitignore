@@ -5,8 +5,8 @@
 /public/uploads/images
 /.pnp
 .pnp.js
-/vitals
-
+/virtualSize
+index.js
 # testing
 /coverage
 

@@ -79,7 +79,7 @@ router.post('/', upload.single('image'), async(req, res)=>{
         title: req.body.title,
         author: req.body.author,
         description: req.body.description,
-        img: req.file.filename,
+        img: req.body.image,
         aboutAuthor: req.body.aboutAuthor,
         twitter: req.body.twitter,
         instagram: req.body.instagram,

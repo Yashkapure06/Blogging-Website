@@ -20,8 +20,6 @@
     <meta property="twitter:image" content="/uploads/images/<%= blog.img %>" />
 
     <title> <%= blog.title %> </title>
-    
-    
 </head>
 
 <body>
@@ -58,7 +56,8 @@
             <article class="entry entry-single">
 
               <div class="entry-img">
-                <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>" class="img-fluid">
+                <img src="<%= blog.img %>" alt="<%= blog.title %>" class="img-fluid">
+                <!-- //cloudinary image upload -->
               </div>
 
               <h2 class="entry-title">
