@@ -6,12 +6,13 @@
 /.pnp
 .pnp.js
 /virtualSize
-vitals.txt
+/vitals.txt
 # testing
 /coverage
 
 # production
 /build
+*.txt
 
 # misc
 .DS_Store
